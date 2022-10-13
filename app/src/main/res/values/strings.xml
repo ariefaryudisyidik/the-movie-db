@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">TMDB</string>
+    <string name="image_poster">Image Poster</string>
+    <string name="image_moviedb">Image MovieDB</string>
+
+    <string name="title">Title:</string>
+    <string name="release_date">Release Date:</string>
+    <string name="average_rating">Average Rating:</string>
+    <string name="overviews">Overviews:</string>
+    <string name="rate_count">Rate Count:</string>
+    <string name="popularity">Popularity:</string>
+    <string name="read_more">Read More</string>
+
+    <string name="find_your_movies">Find your movies</string>
+    <string name="about_movie">About Movie</string>
+    <string name="retry">Retry</string>
+
+    <string name="dummy_title">Spiderman No Way Home</string>
+    <string name="dummy_average_rating">9.5</string>
+    <string name="dummy_release_date">17 Dec 2021</string>
+    <string name="dummy_overview">Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man</string>
+    <string name="dummy_rate_count">11747</string>
+    <string name="dummy_popularity">9695.89</string>
 </resources>

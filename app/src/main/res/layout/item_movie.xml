@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_poster"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/RoundedImage"
+        tools:srcCompat="@drawable/img_spider_man_poster" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/Text.Medium"
+        android:layout_marginHorizontal="16dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_poster"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/Text.Regular"
+        android:layout_marginTop="-2dp"
+        android:maxLines="2"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:text="@string/dummy_title" />
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/Text.Medium"
+        android:layout_marginTop="4dp"
+        android:text="@string/release_date"
+        app:layout_constraintStart_toStartOf="@+id/tv_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <TextView
+        android:id="@+id/tv_release_date"
+        style="@style/Text.Regular"
+        android:layout_marginTop="-2dp"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:text="@string/dummy_release_date" />
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/Text.Medium"
+        android:layout_marginTop="4dp"
+        android:text="@string/average_rating"
+        app:layout_constraintStart_toStartOf="@+id/tv_release_date"
+        app:layout_constraintTop_toBottomOf="@+id/tv_release_date" />
+
+    <TextView
+        android:id="@+id/tv_average_rating"
+        style="@style/Text.Regular"
+        android:layout_marginTop="-2dp"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        tools:text="@string/dummy_average_rating" />
+
+    <TextView
+        android:id="@+id/tv_read_more"
+        style="@style/Text.Regular"
+        android:layout_marginEnd="4dp"
+        android:text="@string/read_more"
+        android:textColor="@color/eucalyptus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_average_rating" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
