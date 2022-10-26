@@ -1,4 +1,4 @@
-package com.tmdb.android.data.local
+package com.tmdb.android.data.local.room
 
 import androidx.paging.PagingSource
 import androidx.room.Dao

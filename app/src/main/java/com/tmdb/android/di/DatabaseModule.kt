@@ -2,7 +2,7 @@ package com.tmdb.android.di
 
 import android.content.Context
 import androidx.room.Room
-import com.tmdb.android.data.local.MovieDatabase
+import com.tmdb.android.data.local.room.MovieDatabase
 import com.tmdb.android.utils.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
@@ -19,14 +19,7 @@ class DatabaseModule {
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(
         context,
-        MovieDatabase::class.java, DATABASE_NAME
-    ).fallbackToDestructiveMigration().build()
-
-    @Provides
-    @Singleton
-    fun provideMovieDao(database: MovieDatabase) = database.movieDao()
-
-    @Provides
-    @Singleton
-    fun provideRemoteKeysDao(database: MovieDatabase) = database.remoteKeysDao()
+        MovieDatabase::class.java,
+        DATABASE_NAME
+    ).build()
 }

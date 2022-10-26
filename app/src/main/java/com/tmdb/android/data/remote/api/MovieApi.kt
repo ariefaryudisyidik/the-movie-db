@@ -1,16 +1,15 @@
-package com.tmdb.android.data.remote
+package com.tmdb.android.data.remote.api
 
 import com.tmdb.android.data.remote.response.TopRatedMovieResponse
 import com.tmdb.android.data.remote.response.UpcomingMovieResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface ApiService {
+interface MovieApi {
 
     @GET("movie/top_rated")
     suspend fun getTopRatedMovie(
-        @Query("page") page: Int,
-        @Query("total_pages") totalPages: Int
+        @Query("page") page: Int? = null
     ): TopRatedMovieResponse
 
     @GET("movie/popular")
