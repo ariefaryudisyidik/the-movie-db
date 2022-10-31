@@ -1,4 +1,4 @@
-package com.tmdb.android.domain.repository
+package com.tmdb.android.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagingData

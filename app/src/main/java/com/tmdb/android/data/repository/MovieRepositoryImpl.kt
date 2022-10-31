@@ -6,7 +6,6 @@ import com.tmdb.android.data.local.room.MovieDatabase
 import com.tmdb.android.data.paging.MovieRemoteMediator
 import com.tmdb.android.data.remote.api.MovieApi
 import com.tmdb.android.domain.model.Movie
-import com.tmdb.android.domain.repository.MovieRepository
 import com.tmdb.android.utils.ITEM_PER_PAGE
 import javax.inject.Inject
 
