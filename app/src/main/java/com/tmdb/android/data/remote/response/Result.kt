@@ -7,7 +7,7 @@ import com.tmdb.android.domain.model.Movie
 data class Result(
     val adult: Boolean,
     @SerializedName("backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String?,
     @SerializedName("genre_ids")
     val genreIds: List<Int>,
     val id: Int,
@@ -31,7 +31,7 @@ data class Result(
 
 fun Result.toDomain(): Movie {
     return Movie(
-        backdropPath = backdropPath,
+        backdropPath = backdropPath.toString(),
         id = id,
         originalTitle = originalTitle,
         overview = overview,

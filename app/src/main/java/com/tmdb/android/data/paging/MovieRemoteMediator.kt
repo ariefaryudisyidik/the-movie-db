@@ -46,8 +46,7 @@ class MovieRemoteMediator(
         }
 
         return try {
-            val responseData =
-                api.getTopRatedMovie(page).results.map { it.toDomain() }
+            val responseData = api.getTopRatedMovie(page).results.map { it.toDomain() }
             val endOfPaginationReached = responseData.isEmpty()
 
             database.withTransaction {
