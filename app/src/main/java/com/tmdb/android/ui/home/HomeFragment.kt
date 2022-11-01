@@ -69,6 +69,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun searchMovies() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
+                viewModel.searchMovies(query)
                 requireActivity().window.decorView.clearFocus()
                 return true
             }
