@@ -1,5 +1,6 @@
 package com.tmdb.android.data.remote.api
 
+import com.tmdb.android.data.remote.response.GenreResponse
 import com.tmdb.android.data.remote.response.MovieResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -31,4 +32,7 @@ interface MovieApi {
         @Query("page") page: Int,
         @Query("query") query: String
     ): MovieResponse
+
+    @GET("genre/movie/list")
+    suspend fun getGenres(): GenreResponse
 }
