@@ -1,6 +1,7 @@
 package com.tmdb.android.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -26,8 +27,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         _binding = FragmentHomeBinding.bind(view)
 
         setupRecyclerView()
-        getTopRatedMovie()
         searchMovies()
+        getTopRatedMovie()
         navigateToDetail()
     }
 
@@ -43,12 +44,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun searchMovies() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                viewModel.searchMovies(query)
                 requireActivity().window.decorView.clearFocus()
                 return true
             }
 
             override fun onQueryTextChange(query: String): Boolean {
+                viewModel.searchMovies(query)
                 return true
             }
         })
@@ -56,6 +57,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.movies.observe(viewLifecycleOwner) {
             movieListAdapter.submitData(lifecycle, it)
         }
+
     }
 
     private fun getTopRatedMovie() {

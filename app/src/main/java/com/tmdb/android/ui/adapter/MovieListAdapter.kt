@@ -29,9 +29,9 @@ class MovieListAdapter(private var onDetailClick: (Movie) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Movie) {
             binding.apply {
+                tvReleaseDate.text = data.releaseDate.withDateFormat()
                 ivPoster.loadPhotoUrl(data.posterPathUrl())
                 tvTitle.text = data.title
-                tvReleaseDate.text = data.releaseDate.withDateFormat()
                 tvAverageRating.text = data.voteAverage.toString()
                 tvReadMore.setOnClickListener { onDetailClick(data) }
             }

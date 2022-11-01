@@ -24,7 +24,11 @@ fun ImageView.loadPhotoUrl(
 }
 
 fun String.withDateFormat(): String {
+    var result = "-"
     val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-    val date = format.parse(this) as Date
-    return DateFormat.getDateInstance(DateFormat.DEFAULT).format(date)
+    if (this != "") {
+        val date = format.parse(this) as Date
+        result = DateFormat.getDateInstance(DateFormat.DEFAULT).format(date)
+    }
+    return result
 }

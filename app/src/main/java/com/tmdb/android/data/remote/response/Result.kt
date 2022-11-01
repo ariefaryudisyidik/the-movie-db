@@ -30,14 +30,14 @@ data class Result(
 
 fun Result.toDomain(): Movie {
     return Movie(
-        backdropPath = backdropPath.toString(),
+        backdropPath = backdropPath ?: "",
         id = id,
-        originalTitle = originalTitle.toString(),
-        overview = overview.toString(),
+        originalTitle = originalTitle ?: "",
+        overview = overview ?: "",
         popularity = popularity ?: 0.0,
-        posterPath = posterPath.toString(),
-        releaseDate = releaseDate.toString(),
-        title = title.toString(),
+        posterPath = posterPath ?: "",
+        releaseDate = releaseDate ?: "",
+        title = title ?: "",
         voteAverage = voteAverage ?: 0.0,
         voteCount = voteCount ?: 0
     )
