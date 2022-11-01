@@ -3,7 +3,8 @@ package com.tmdb.android.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class TopRatedMovieResponse(
+data class MovieResponse(
+    val dates: Dates,
     val page: Int,
     val results: List<Result>,
     @SerializedName("total_pages")
