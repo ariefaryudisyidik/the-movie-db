@@ -2,7 +2,8 @@ package com.tmdb.android.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.paging.*
-import com.tmdb.android.data.paging.MoviePagingSource
+import com.tmdb.android.data.paging.SearchMoviesPagingSource
+import com.tmdb.android.data.paging.TopRatedMoviePagingSource
 import com.tmdb.android.data.remote.api.MovieApi
 import com.tmdb.android.domain.model.Movie
 import com.tmdb.android.utils.ITEM_PER_PAGE
@@ -16,6 +17,12 @@ class MovieRepositoryImpl @Inject constructor(
     override fun getMovie(): LiveData<PagingData<Movie>> =
         Pager(
             config = PagingConfig(pageSize = ITEM_PER_PAGE),
-            pagingSourceFactory = { MoviePagingSource(api) }
+            pagingSourceFactory = { TopRatedMoviePagingSource(api) }
+        ).liveData
+
+    override fun searchMovies(query: String): LiveData<PagingData<Movie>> =
+        Pager(
+            config = PagingConfig(pageSize = ITEM_PER_PAGE),
+            pagingSourceFactory = { SearchMoviesPagingSource(api, query) }
         ).liveData
 }

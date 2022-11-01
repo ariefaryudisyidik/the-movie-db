@@ -7,7 +7,10 @@ import com.tmdb.android.data.remote.response.toDomain
 import com.tmdb.android.domain.model.Movie
 import com.tmdb.android.utils.INITIAL_PAGE_INDEX
 
-class MoviePagingSource(private val api: MovieApi) : PagingSource<Int, Movie>() {
+class SearchMoviesPagingSource(
+    private val api: MovieApi,
+    private val query: String
+) : PagingSource<Int, Movie>() {
 
     override fun getRefreshKey(state: PagingState<Int, Movie>): Int? {
         return state.anchorPosition?.let { position ->
@@ -19,7 +22,7 @@ class MoviePagingSource(private val api: MovieApi) : PagingSource<Int, Movie>() 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
         return try {
             val page = params.key ?: INITIAL_PAGE_INDEX
-            val responseData = api.getTopRatedMovie(page).results
+            val responseData = api.searchMovies(page, query).results
 
             LoadResult.Page(
                 data = responseData.map { it.toDomain() },

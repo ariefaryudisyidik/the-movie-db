@@ -4,41 +4,41 @@ import com.google.gson.annotations.SerializedName
 import com.tmdb.android.domain.model.Movie
 
 data class Result(
-    val adult: Boolean,
+    val adult: Boolean?,
     @SerializedName("backdrop_path")
     val backdropPath: String?,
     @SerializedName("genre_ids")
     val genreIds: List<Int>,
     val id: Int,
     @SerializedName("original_language")
-    val originalLanguage: String,
+    val originalLanguage: String?,
     @SerializedName("original_title")
-    val originalTitle: String,
-    val overview: String,
-    val popularity: Double,
+    val originalTitle: String?,
+    val overview: String?,
+    val popularity: Double?,
     @SerializedName("poster_path")
-    val posterPath: String,
+    val posterPath: String?,
     @SerializedName("release_date")
-    val releaseDate: String,
-    val title: String,
-    val video: Boolean,
+    val releaseDate: String?,
+    val title: String?,
+    val video: Boolean?,
     @SerializedName("vote_average")
-    val voteAverage: Double,
+    val voteAverage: Double?,
     @SerializedName("vote_count")
-    val voteCount: Int
+    val voteCount: Int?
 )
 
 fun Result.toDomain(): Movie {
     return Movie(
         backdropPath = backdropPath.toString(),
         id = id,
-        originalTitle = originalTitle,
-        overview = overview,
-        popularity = popularity,
-        posterPath = posterPath,
-        releaseDate = releaseDate,
-        title = title,
-        voteAverage = voteAverage,
-        voteCount = voteCount
+        originalTitle = originalTitle.toString(),
+        overview = overview.toString(),
+        popularity = popularity ?: 0.0,
+        posterPath = posterPath.toString(),
+        releaseDate = releaseDate.toString(),
+        title = title.toString(),
+        voteAverage = voteAverage ?: 0.0,
+        voteCount = voteCount ?: 0
     )
 }

@@ -6,4 +6,5 @@ import com.tmdb.android.domain.model.Movie
 
 interface MovieRepository {
     fun getMovie(): LiveData<PagingData<Movie>>
+    fun searchMovies(query: String): LiveData<PagingData<Movie>>
 }

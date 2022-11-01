@@ -2,6 +2,7 @@ package com.tmdb.android.ui.home
 
 import android.os.Bundle
 import android.view.View
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -25,7 +26,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         _binding = FragmentHomeBinding.bind(view)
 
         setupRecyclerView()
-        observeData()
+        getTopRatedMovie()
+        searchMovies()
+        navigateToDetail()
     }
 
     private fun setupRecyclerView() {
@@ -37,15 +40,33 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         )
     }
 
-    private fun observeData() {
+    private fun searchMovies() {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                viewModel.searchMovies(query)
+                requireActivity().window.decorView.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(query: String): Boolean {
+                return true
+            }
+        })
+
+        viewModel.movies.observe(viewLifecycleOwner) {
+            movieListAdapter.submitData(lifecycle, it)
+        }
+    }
+
+    private fun getTopRatedMovie() {
         viewModel.topRatedMovies.observe(viewLifecycleOwner) {
             movieListAdapter.submitData(lifecycle, it)
         }
+    }
 
+    private fun navigateToDetail() {
         viewModel.navigateToDetail.observe(viewLifecycleOwner, EventObserver {
-            findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(it)
-            )
+            findNavController().navigate(HomeFragmentDirections.toMovieDetailFragment(it))
         })
     }
 
