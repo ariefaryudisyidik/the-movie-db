@@ -74,7 +74,7 @@
         style="@style/Text.Regular"
         android:layout_marginEnd="4dp"
         android:text="@string/read_more"
-        android:textColor="@color/eucalyptus"
+        android:textColor="@color/green_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_average_rating" />

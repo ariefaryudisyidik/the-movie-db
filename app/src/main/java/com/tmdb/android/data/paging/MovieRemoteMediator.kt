@@ -5,8 +5,8 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
+import com.tmdb.android.data.local.database.MovieDatabase
 import com.tmdb.android.data.local.entity.RemoteKeys
-import com.tmdb.android.data.local.room.MovieDatabase
 import com.tmdb.android.data.remote.api.MovieApi
 import com.tmdb.android.data.remote.response.toDomain
 import com.tmdb.android.domain.model.Movie

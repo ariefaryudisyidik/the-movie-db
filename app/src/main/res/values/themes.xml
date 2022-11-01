@@ -2,22 +2,22 @@
     <!-- Base application theme. -->
     <style name="Theme.TMDB" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/rich_black</item>
-        <item name="colorPrimaryVariant">@color/charleston_green</item>
+        <item name="colorPrimary">@color/black_4</item>
+        <item name="colorPrimaryVariant">@color/black_3</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/eucalyptus</item>
-        <item name="colorSecondaryVariant">@color/paolo_veronese_green</item>
+        <item name="colorSecondary">@color/green_2</item>
+        <item name="colorSecondaryVariant">@color/green_3</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/charleston_green</item>
+        <item name="android:statusBarColor">@color/black_3</item>
         <!-- Background color -->
-        <item name="android:windowBackground">@color/charleston_green</item>
+        <item name="android:windowBackground">@color/black_3</item>
     </style>
 
     <!-- Splash Screen -->
     <style name="Theme.TMDB.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/charleston_green</item>
+        <item name="windowSplashScreenBackground">@color/black_3</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_tmdb_vertical</item>
         <item name="postSplashScreenTheme">@style/Theme.TMDB</item>
     </style>
@@ -51,5 +51,15 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeBottomLeft">16dp</item>
         <item name="cornerSizeBottomRight">16dp</item>
+    </style>
+
+    <!-- SearchView -->
+    <style name="SearchView">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:iconifiedByDefault">false</item>
+        <item name="android:queryHint">@string/search_here</item>
+        <item name="android:editTextColor">@color/white_1</item>
+        <item name="android:textColorHint">@color/white_1</item>
     </style>
 </resources>

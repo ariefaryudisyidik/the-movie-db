@@ -1,4 +1,4 @@
-package com.tmdb.android.data.local.room
+package com.tmdb.android.data.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

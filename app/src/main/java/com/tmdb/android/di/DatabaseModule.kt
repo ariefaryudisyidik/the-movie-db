@@ -2,7 +2,7 @@ package com.tmdb.android.di
 
 import android.content.Context
 import androidx.room.Room
-import com.tmdb.android.data.local.room.MovieDatabase
+import com.tmdb.android.data.local.database.MovieDatabase
 import com.tmdb.android.utils.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
