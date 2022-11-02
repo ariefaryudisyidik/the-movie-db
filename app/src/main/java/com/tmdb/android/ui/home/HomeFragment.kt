@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.tmdb.android.R
 import com.tmdb.android.databinding.FragmentHomeBinding
-import com.tmdb.android.ui.adapter.CategoryListAdapter
+import com.tmdb.android.ui.adapter.GenreListAdapter
 import com.tmdb.android.ui.adapter.LoadingStateAdapter
 import com.tmdb.android.ui.adapter.MovieListAdapter
 import com.tmdb.android.utils.EventObserver
@@ -22,7 +22,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding get() = _binding!!
     private val viewModel: HomeViewModel by viewModels()
 
-    private lateinit var categoryListAdapter: CategoryListAdapter
+    private lateinit var genreListAdapter: GenreListAdapter
     private lateinit var movieListAdapter: MovieListAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,10 +36,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun setupRecyclerView() {
-        categoryListAdapter = CategoryListAdapter()
+        genreListAdapter = GenreListAdapter(viewModel)
         movieListAdapter = MovieListAdapter(viewModel::onMovieClicked)
 
-        binding.rvCategory.adapter = categoryListAdapter
+        binding.rvGenre.adapter = genreListAdapter
         binding.rvMovie.adapter = movieListAdapter.withLoadStateFooter(
             footer = LoadingStateAdapter {
                 movieListAdapter.retry()
@@ -48,20 +48,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun observeData() {
-        viewModel.genres.observe(viewLifecycleOwner) { result ->
+        viewModel.getGenres.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Resource.Success -> {
-                    categoryListAdapter.submitList(result.data)
+                    genreListAdapter.submitList(result.data)
                 }
                 else -> {}
             }
         }
 
-        viewModel.movies.observe(viewLifecycleOwner) {
+        viewModel.getMovies.observe(viewLifecycleOwner) {
             movieListAdapter.submitData(lifecycle, it)
         }
 
-        viewModel.topRatedMovies.observe(viewLifecycleOwner) {
+        viewModel.getTopRatedMovie.observe(viewLifecycleOwner) {
             movieListAdapter.submitData(lifecycle, it)
         }
     }

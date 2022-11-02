@@ -1,31 +1,41 @@
 package com.tmdb.android.data.repository
 
 import androidx.lifecycle.LiveData
-import androidx.paging.*
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
+import com.tmdb.android.data.paging.MovieByGenrePagingSource
 import com.tmdb.android.data.paging.SearchMoviesPagingSource
 import com.tmdb.android.data.paging.TopRatedMoviePagingSource
 import com.tmdb.android.data.remote.api.MovieApi
 import com.tmdb.android.data.remote.response.GenreResponse
 import com.tmdb.android.domain.model.Movie
-import com.tmdb.android.utils.ITEM_PER_PAGE
+import com.tmdb.android.utils.PAGE_SIZE
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
     private val api: MovieApi
 ) : MovieRepository {
 
-    @ExperimentalPagingApi
-    override fun getMovie(): LiveData<PagingData<Movie>> {
+    override fun searchMovies(query: String): LiveData<PagingData<Movie>> {
         return Pager(
-            config = PagingConfig(pageSize = ITEM_PER_PAGE),
+            config = PagingConfig(pageSize = PAGE_SIZE),
+            pagingSourceFactory = { SearchMoviesPagingSource(api, query) }
+        ).liveData
+    }
+
+    override fun getTopRatedMovie(): LiveData<PagingData<Movie>> {
+        return Pager(
+            config = PagingConfig(pageSize = PAGE_SIZE),
             pagingSourceFactory = { TopRatedMoviePagingSource(api) }
         ).liveData
     }
 
-    override fun searchMovies(query: String): LiveData<PagingData<Movie>> {
+    override fun getMovieByGenre(genreId: Int): LiveData<PagingData<Movie>> {
         return Pager(
-            config = PagingConfig(pageSize = ITEM_PER_PAGE),
-            pagingSourceFactory = { SearchMoviesPagingSource(api, query) }
+            config = PagingConfig(pageSize = PAGE_SIZE),
+            pagingSourceFactory = { MovieByGenrePagingSource(api, genreId) }
         ).liveData
     }
 

@@ -6,7 +6,8 @@ import com.tmdb.android.data.remote.response.GenreResponse
 import com.tmdb.android.domain.model.Movie
 
 interface MovieRepository {
-    fun getMovie(): LiveData<PagingData<Movie>>
     fun searchMovies(query: String): LiveData<PagingData<Movie>>
+    fun getTopRatedMovie(): LiveData<PagingData<Movie>>
+    fun getMovieByGenre(genreId: Int): LiveData<PagingData<Movie>>
     suspend fun getGenres(): GenreResponse
 }

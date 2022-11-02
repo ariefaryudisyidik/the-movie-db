@@ -35,4 +35,10 @@ interface MovieApi {
 
     @GET("genre/movie/list")
     suspend fun getGenres(): GenreResponse
+
+    @GET("discover/movie")
+    suspend fun getMovieByGenre(
+        @Query("page") page: Int,
+        @Query("with_genres") genreId: Int
+    ): MovieResponse
 }

@@ -5,14 +5,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.tmdb.android.databinding.ItemCategoriesBinding
+import com.tmdb.android.databinding.ItemGenresBinding
 import com.tmdb.android.domain.model.Genre
+import com.tmdb.android.ui.home.HomeViewModel
 
-class CategoryListAdapter : ListAdapter<Genre, CategoryListAdapter.ViewHolder>(DIFF_CALLBACK) {
+class GenreListAdapter(
+    private val viewModel: HomeViewModel
+) : ListAdapter<Genre, GenreListAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            ItemCategoriesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemGenresBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -21,10 +24,13 @@ class CategoryListAdapter : ListAdapter<Genre, CategoryListAdapter.ViewHolder>(D
         holder.bind(data)
     }
 
-    inner class ViewHolder(private val binding: ItemCategoriesBinding) :
+    inner class ViewHolder(private val binding: ItemGenresBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Genre) {
-            binding.btnCategories.text = data.name
+            binding.btnGenres.text = data.name
+            binding.btnGenres.setOnClickListener {
+                viewModel.getMovieByGenre(data.id)
+            }
         }
     }
 

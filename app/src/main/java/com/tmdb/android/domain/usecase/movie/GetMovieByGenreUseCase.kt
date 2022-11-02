@@ -6,10 +6,10 @@ import com.tmdb.android.data.repository.MovieRepository
 import com.tmdb.android.domain.model.Movie
 import javax.inject.Inject
 
-class GetTopRatedMovieUseCase @Inject constructor(
+class GetMovieByGenreUseCase @Inject constructor(
     private val repository: MovieRepository
 ) {
-    operator fun invoke(): LiveData<PagingData<Movie>> {
-        return repository.getTopRatedMovie()
+    operator fun invoke(genreId: Int): LiveData<PagingData<Movie>> {
+        return repository.getMovieByGenre(genreId)
     }
 }
