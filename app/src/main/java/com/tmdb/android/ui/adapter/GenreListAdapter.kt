@@ -34,7 +34,7 @@ class GenreListAdapter(
             binding.apply {
                 btnGenres.text = data.name
                 btnGenres.setOnClickListener {
-                    viewModel.getMovieByGenre(data.id)
+                    viewModel.setMovieByGenre(data.id)
                 }
 
                 viewModel.getGenreId.observe(lifecycleOwner) { genreId ->

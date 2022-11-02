@@ -27,22 +27,22 @@ class HomeViewModel @Inject constructor(
     val getGenres = getGenresUseCase()
     val getTopRatedMovie = getTopRatedMovieUseCase().cachedIn(viewModelScope)
 
-    val searchMoviesResult = MutableLiveData<PagingData<Movie>>()
-    fun searchMovies(query: String) {
+    val getSearchMovies = MutableLiveData<PagingData<Movie>>()
+    fun setSearchMovies(query: String) {
         viewModelScope.launch {
             searchMoviesUseCase(query).cachedIn(viewModelScope).asFlow().collect {
-                searchMoviesResult.postValue(it)
+                getSearchMovies.postValue(it)
             }
         }
     }
 
     val getGenreId = MutableLiveData<Int>()
-    val getMovieByGenreResult = MutableLiveData<PagingData<Movie>>()
-    fun getMovieByGenre(genreId: Int) {
+    val getMovieByGenre = MutableLiveData<PagingData<Movie>>()
+    fun setMovieByGenre(genreId: Int) {
         getGenreId.postValue(genreId)
         viewModelScope.launch {
             getMovieByGenreUseCase(genreId).cachedIn(viewModelScope).asFlow().collect {
-                getMovieByGenreResult.postValue(it)
+                getMovieByGenre.postValue(it)
             }
         }
     }

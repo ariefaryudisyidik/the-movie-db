@@ -51,11 +51,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             genreListAdapter.submitList(result.data)
         }
 
-        viewModel.searchMoviesResult.observe(viewLifecycleOwner) {
+        viewModel.getSearchMovies.observe(viewLifecycleOwner) {
             movieListAdapter.submitData(lifecycle, it)
         }
 
-        viewModel.getMovieByGenreResult.observe(viewLifecycleOwner) {
+        viewModel.getMovieByGenre.observe(viewLifecycleOwner) {
             movieListAdapter.submitData(lifecycle, it)
         }
 
@@ -67,13 +67,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun searchMovies() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                viewModel.searchMovies(query)
+                viewModel.setSearchMovies(query)
                 requireActivity().window.decorView.clearFocus()
                 return true
             }
 
             override fun onQueryTextChange(query: String): Boolean {
-                viewModel.searchMovies(query)
+                viewModel.setSearchMovies(query)
                 return true
             }
         })
