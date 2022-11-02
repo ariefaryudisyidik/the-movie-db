@@ -24,6 +24,9 @@ class HomeViewModel @Inject constructor(
     getTopRatedMovieUseCase: GetTopRatedMovieUseCase,
 ) : ViewModel() {
 
+    val getGenres = getGenresUseCase()
+    val getTopRatedMovie = getTopRatedMovieUseCase().cachedIn(viewModelScope)
+
     val searchMoviesResult = MutableLiveData<PagingData<Movie>>()
     fun searchMovies(query: String) {
         viewModelScope.launch {
@@ -43,10 +46,6 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
-
-
-    val getGenres = getGenresUseCase()
-    val getTopRatedMovie = getTopRatedMovieUseCase().cachedIn(viewModelScope)
 
     val navigateToDetail = MutableLiveData<Event<Movie>>()
     fun onMovieClicked(movie: Movie) {

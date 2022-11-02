@@ -55,6 +55,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             movieListAdapter.submitData(lifecycle, it)
         }
 
+        viewModel.getMovieByGenreResult.observe(viewLifecycleOwner) {
+            movieListAdapter.submitData(lifecycle, it)
+        }
+
         viewModel.getTopRatedMovie.observe(viewLifecycleOwner) {
             movieListAdapter.submitData(lifecycle, it)
         }
