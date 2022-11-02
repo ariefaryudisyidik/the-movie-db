@@ -2,9 +2,11 @@ package com.tmdb.android.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.tmdb.android.R
 import com.tmdb.android.databinding.ItemGenresBinding
 import com.tmdb.android.domain.model.Genre
 import com.tmdb.android.ui.home.HomeViewModel
@@ -27,9 +29,23 @@ class GenreListAdapter(
     inner class ViewHolder(private val binding: ItemGenresBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Genre) {
-            binding.btnGenres.text = data.name
-            binding.btnGenres.setOnClickListener {
-                viewModel.getMovieByGenre(data.id)
+            binding.apply {
+                btnGenres.text = data.name
+                btnGenres.setOnClickListener {
+                    btnGenres.setBackgroundColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.green_2
+                        )
+                    )
+                    btnGenres.setTextColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.black_3
+                        )
+                    )
+                    viewModel.getMovieByGenre(data.id)
+                }
             }
         }
     }
