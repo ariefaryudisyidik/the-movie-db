@@ -3,6 +3,7 @@ package com.tmdb.android.ui.home
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -12,6 +13,7 @@ import com.tmdb.android.ui.adapter.GenreListAdapter
 import com.tmdb.android.ui.adapter.LoadingStateAdapter
 import com.tmdb.android.ui.adapter.MovieListAdapter
 import com.tmdb.android.utils.EventObserver
+import com.tmdb.android.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,8 +40,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         genreListAdapter = GenreListAdapter(viewModel, viewLifecycleOwner)
         movieListAdapter = MovieListAdapter(viewModel::onMovieClicked)
 
-        binding.rvGenre.adapter = genreListAdapter
-        binding.rvMovie.adapter = movieListAdapter.withLoadStateFooter(
+        binding.layoutHome.rvGenre.adapter = genreListAdapter
+        binding.layoutHome.rvMovie.adapter = movieListAdapter.withLoadStateFooter(
             footer = LoadingStateAdapter {
                 movieListAdapter.retry()
             }
@@ -48,7 +50,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun observeData() {
         viewModel.getGenres.observe(viewLifecycleOwner) { result ->
-            genreListAdapter.submitList(result.data)
+            when (result) {
+                is Resource.Loading -> {}
+                is Resource.Success -> {
+                    layoutNetworkState(true)
+                    genreListAdapter.submitList(result.data)
+                }
+                is Resource.Error -> {
+                    layoutNetworkState(false)
+                }
+            }
         }
 
         viewModel.getSearchMovies.observe(viewLifecycleOwner) {
@@ -65,7 +76,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun searchMovies() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.layoutHome.searchView.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 viewModel.setSearchMovies(query)
                 requireActivity().window.decorView.clearFocus()
@@ -77,6 +89,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 return true
             }
         })
+    }
+
+    private fun layoutNetworkState(state: Boolean) {
+        binding.layoutHome.root.isVisible = state
+        binding.layoutErrorConnection.root.isVisible = !state
     }
 
     private fun navigation() {
