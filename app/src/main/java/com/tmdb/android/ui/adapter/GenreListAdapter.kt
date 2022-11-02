@@ -2,15 +2,15 @@ package com.tmdb.android.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.tmdb.android.R
 import com.tmdb.android.databinding.ItemGenresBinding
 import com.tmdb.android.domain.model.Genre
 import com.tmdb.android.ui.home.HomeViewModel
+import com.tmdb.android.utils.activeButton
+import com.tmdb.android.utils.inactiveButton
 
 class GenreListAdapter(
     private val viewModel: HomeViewModel,
@@ -39,31 +39,9 @@ class GenreListAdapter(
 
                 viewModel.getGenreId.observe(lifecycleOwner) { genreId ->
                     if (genreId == data.id) {
-                        btnGenres.setBackgroundColor(
-                            ContextCompat.getColor(
-                                itemView.context,
-                                R.color.green_2
-                            )
-                        )
-                        btnGenres.setTextColor(
-                            ContextCompat.getColor(
-                                itemView.context,
-                                R.color.black_3
-                            )
-                        )
+                        itemView.context.activeButton(btnGenres)
                     } else {
-                        btnGenres.setBackgroundColor(
-                            ContextCompat.getColor(
-                                itemView.context,
-                                R.color.black_2
-                            )
-                        )
-                        btnGenres.setTextColor(
-                            ContextCompat.getColor(
-                                itemView.context,
-                                R.color.white_1
-                            )
-                        )
+                        itemView.context.inactiveButton(btnGenres)
                     }
                 }
             }

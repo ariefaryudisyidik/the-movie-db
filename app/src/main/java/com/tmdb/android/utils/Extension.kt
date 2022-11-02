@@ -1,10 +1,13 @@
 package com.tmdb.android.utils
 
 import android.content.Context
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.tmdb.android.R
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -31,4 +34,34 @@ fun String.withDateFormat(): String {
         result = DateFormat.getDateInstance(DateFormat.DEFAULT).format(date)
     }
     return result
+}
+
+fun Context.activeButton(button: Button) {
+    button.setBackgroundColor(
+        ContextCompat.getColor(
+            this,
+            R.color.green_2
+        )
+    )
+    button.setTextColor(
+        ContextCompat.getColor(
+            this,
+            R.color.black_3
+        )
+    )
+}
+
+fun Context.inactiveButton(button: Button) {
+    button.setBackgroundColor(
+        ContextCompat.getColor(
+            this,
+            R.color.black_2
+        )
+    )
+    button.setTextColor(
+        ContextCompat.getColor(
+            this,
+            R.color.white_1
+        )
+    )
 }
