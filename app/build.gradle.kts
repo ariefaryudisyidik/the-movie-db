@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.androidx.room.paging)
     implementation(libs.glide)
     implementation(libs.hilt.android)
+    implementation(libs.lottie)
     implementation(libs.material)
     implementation(libs.okhttp3.logging.interceptor)
     implementation(libs.retrofit2.converter.gson)
