@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.androidx.paging.runtime.ktx)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.paging)
+    implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.glide)
     implementation(libs.hilt.android)
     implementation(libs.lottie)
