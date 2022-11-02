@@ -12,7 +12,6 @@ import com.tmdb.android.ui.adapter.GenreListAdapter
 import com.tmdb.android.ui.adapter.LoadingStateAdapter
 import com.tmdb.android.ui.adapter.MovieListAdapter
 import com.tmdb.android.utils.EventObserver
-import com.tmdb.android.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,7 +35,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun setupRecyclerView() {
-        genreListAdapter = GenreListAdapter(viewModel)
+        genreListAdapter = GenreListAdapter(viewModel, viewLifecycleOwner)
         movieListAdapter = MovieListAdapter(viewModel::onMovieClicked)
 
         binding.rvGenre.adapter = genreListAdapter
@@ -49,15 +48,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun observeData() {
         viewModel.getGenres.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Resource.Success -> {
-                    genreListAdapter.submitList(result.data)
-                }
-                else -> {}
-            }
+            genreListAdapter.submitList(result.data)
         }
 
-        viewModel.getMovies.observe(viewLifecycleOwner) {
+        viewModel.searchMoviesResult.observe(viewLifecycleOwner) {
             movieListAdapter.submitData(lifecycle, it)
         }
 
