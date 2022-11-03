@@ -113,7 +113,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun navigation() {
         viewModel.navigateToDetail.observe(viewLifecycleOwner, EventObserver {
             findNavController().navigate(HomeFragmentDirections.toMovieDetailFragment(it))
-            binding.layoutHome.searchView.setQuery(null, false)
         })
     }
 
