@@ -62,4 +62,8 @@ class HomeViewModel @Inject constructor(
     fun onMovieClicked(movie: Movie) {
         navigateToDetail.postValue(Event(movie))
     }
+
+    init {
+        setTopRatedMovie()
+    }
 }

@@ -69,15 +69,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             movieListAdapter.submitData(lifecycle, it)
         }
 
-        viewModel.setMovieByGenre(0)
+        viewModel.getTopRatedMovie.observe(viewLifecycleOwner) {
+            movieListAdapter.submitData(lifecycle, it)
+        }
+
         viewModel.getMovieByGenre.observe(viewLifecycleOwner) {
             movieListAdapter.submitData(lifecycle, it)
         }
 
-        viewModel.setTopRatedMovie()
-        viewModel.getTopRatedMovie.observe(viewLifecycleOwner) {
-            movieListAdapter.submitData(lifecycle, it)
-        }
+//        viewModel.setTopRatedMovie()
+
     }
 
     private fun searchMovies() {
@@ -90,7 +91,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
 
             override fun onQueryTextChange(query: String): Boolean {
-                viewModel.setSearchMovies(query)
+                if (query != "") viewModel.setSearchMovies(query)
                 return true
             }
         })
