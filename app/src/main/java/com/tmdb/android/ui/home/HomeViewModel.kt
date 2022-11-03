@@ -6,12 +6,10 @@ import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.tmdb.android.data.remote.response.VideoResponse
 import com.tmdb.android.domain.model.Genre
 import com.tmdb.android.domain.model.Movie
-import com.tmdb.android.domain.usecase.movie.GetGenresUseCase
-import com.tmdb.android.domain.usecase.movie.GetMovieByGenreUseCase
-import com.tmdb.android.domain.usecase.movie.GetTopRatedMovieUseCase
-import com.tmdb.android.domain.usecase.movie.SearchMoviesUseCase
+import com.tmdb.android.domain.usecase.movie.*
 import com.tmdb.android.utils.Event
 import com.tmdb.android.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,10 +19,18 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val searchMoviesUseCase: SearchMoviesUseCase,
-    private val getMovieByGenreUseCase: GetMovieByGenreUseCase,
     private val getGenresUseCase: GetGenresUseCase,
     private val getTopRatedMovieUseCase: GetTopRatedMovieUseCase,
+    private val getMovieByGenreUseCase: GetMovieByGenreUseCase,
+    private val getVideosUseCase: GetVideosUseCase
 ) : ViewModel() {
+
+    val getSearchMovies = MutableLiveData<PagingData<Movie>>()
+    fun setSearchMovies(query: String) = viewModelScope.launch {
+        searchMoviesUseCase(query).cachedIn(viewModelScope).asFlow().collect {
+            getSearchMovies.postValue(it)
+        }
+    }
 
     val getGenres = MutableLiveData<Resource<List<Genre>>>()
     fun setGenres() = viewModelScope.launch {
@@ -37,13 +43,6 @@ class HomeViewModel @Inject constructor(
     fun setTopRatedMovie() = viewModelScope.launch {
         getTopRatedMovieUseCase().cachedIn(viewModelScope).asFlow().collect {
             getTopRatedMovie.postValue(it)
-        }
-    }
-
-    val getSearchMovies = MutableLiveData<PagingData<Movie>>()
-    fun setSearchMovies(query: String) = viewModelScope.launch {
-        searchMoviesUseCase(query).cachedIn(viewModelScope).asFlow().collect {
-            getSearchMovies.postValue(it)
         }
     }
 

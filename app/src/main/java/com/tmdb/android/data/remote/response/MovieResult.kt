@@ -3,7 +3,7 @@ package com.tmdb.android.data.remote.response
 import com.google.gson.annotations.SerializedName
 import com.tmdb.android.domain.model.Movie
 
-data class Result(
+data class MovieResult(
     val adult: Boolean?,
     @SerializedName("backdrop_path")
     val backdropPath: String?,
@@ -28,7 +28,7 @@ data class Result(
     val voteCount: Int?
 )
 
-fun Result.toDomain(): Movie {
+fun MovieResult.toDomain(): Movie {
     return Movie(
         backdropPath = backdropPath ?: "",
         id = id,
