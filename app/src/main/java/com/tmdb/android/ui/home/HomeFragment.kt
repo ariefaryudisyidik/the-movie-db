@@ -69,6 +69,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             movieListAdapter.submitData(lifecycle, it)
         }
 
+        viewModel.setMovieByGenre(0)
         viewModel.getMovieByGenre.observe(viewLifecycleOwner) {
             movieListAdapter.submitData(lifecycle, it)
         }
