@@ -102,9 +102,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun refresh() {
-        binding.refresh.setOnRefreshListener {
-            observeData()
-            binding.refresh.isRefreshing = false
+        binding.apply {
+            refresh.setOnRefreshListener {
+                observeData()
+                layoutHome.searchView.setQuery(null, false)
+                refresh.isRefreshing = false
+            }
         }
     }
 
