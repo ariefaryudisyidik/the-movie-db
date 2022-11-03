@@ -106,6 +106,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             refresh.setOnRefreshListener {
                 observeData()
                 layoutHome.searchView.setQuery(null, false)
+                requireActivity().window.decorView.clearFocus()
                 refresh.isRefreshing = false
             }
         }
