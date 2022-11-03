@@ -22,6 +22,7 @@ fun ImageView.loadPhotoUrl(
     Glide.with(context)
         .load(url)
         .transition(DrawableTransitionOptions.withCrossFade())
+        .placeholder(R.color.black_2)
         .into(this)
         .clearOnDetach()
 }
