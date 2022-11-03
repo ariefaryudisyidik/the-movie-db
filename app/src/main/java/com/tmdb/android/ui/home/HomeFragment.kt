@@ -33,6 +33,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setupRecyclerView()
         observeData()
         searchMovies()
+        refresh()
         navigation()
     }
 
@@ -49,9 +50,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun observeData() {
+        viewModel.setGenres()
         viewModel.getGenres.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is Resource.Loading -> {}
+                is Resource.Loading -> {
+                }
                 is Resource.Success -> {
                     layoutNetworkState(true)
                     genreListAdapter.submitList(result.data)
@@ -70,6 +73,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             movieListAdapter.submitData(lifecycle, it)
         }
 
+        viewModel.setTopRatedMovie()
         viewModel.getTopRatedMovie.observe(viewLifecycleOwner) {
             movieListAdapter.submitData(lifecycle, it)
         }
@@ -94,6 +98,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun layoutNetworkState(state: Boolean) {
         binding.layoutHome.root.isVisible = state
         binding.layoutErrorConnection.root.isVisible = !state
+    }
+
+    private fun refresh() {
+        binding.refresh.setOnRefreshListener {
+            observeData()
+            binding.refresh.isRefreshing = false
+        }
     }
 
     private fun navigation() {
