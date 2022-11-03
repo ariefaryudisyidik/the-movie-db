@@ -53,8 +53,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.setGenres()
         viewModel.getGenres.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is Resource.Loading -> {
-                }
+                is Resource.Loading -> {}
                 is Resource.Success -> {
                     layoutNetworkState(true)
                     genreListAdapter.submitList(result.data)
@@ -66,19 +65,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         viewModel.getSearchMovies.observe(viewLifecycleOwner) {
-            movieListAdapter.submitData(lifecycle, it)
+            viewModel.getTopRatedMovie.postValue(it)
+        }
+
+        viewModel.getMovieByGenre.observe(viewLifecycleOwner) {
+            viewModel.getTopRatedMovie.postValue(it)
         }
 
         viewModel.getTopRatedMovie.observe(viewLifecycleOwner) {
             movieListAdapter.submitData(lifecycle, it)
         }
-
-        viewModel.getMovieByGenre.observe(viewLifecycleOwner) {
-            movieListAdapter.submitData(lifecycle, it)
-        }
-
-//        viewModel.setTopRatedMovie()
-
     }
 
     private fun searchMovies() {
@@ -105,6 +101,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun refresh() {
         binding.apply {
             refresh.setOnRefreshListener {
+                viewModel.setTopRatedMovie()
                 observeData()
                 layoutHome.searchView.setQuery(null, false)
                 requireActivity().window.decorView.clearFocus()
@@ -116,6 +113,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun navigation() {
         viewModel.navigateToDetail.observe(viewLifecycleOwner, EventObserver {
             findNavController().navigate(HomeFragmentDirections.toMovieDetailFragment(it))
+            binding.layoutHome.searchView.setQuery(null, false)
         })
     }
 
