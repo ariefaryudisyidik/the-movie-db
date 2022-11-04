@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:scrollbars="none">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -12,10 +13,9 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_backdrop"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="-8dp"
+            android:layout_height="240dp"
             android:adjustViewBounds="true"
-            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -25,12 +25,13 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_poster"
             android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_height="170dp"
             android:layout_marginStart="16dp"
             android:adjustViewBounds="true"
-            app:layout_constraintBottom_toTopOf="@id/guideline"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_backdrop"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/iv_backdrop"
             app:shapeAppearanceOverlay="@style/RoundedImage"
             tools:srcCompat="@drawable/img_spider_man_poster" />
 
@@ -39,10 +40,10 @@
             style="@style/Text.SemiBold"
             android:layout_marginHorizontal="16dp"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_poster"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_poster"
-            app:layout_constraintTop_toBottomOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/iv_backdrop"
             tools:text="@string/dummy_title" />
 
         <include
@@ -50,33 +51,22 @@
             layout="@layout/layout_genres"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline2" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_poster" />
 
         <include
             android:id="@+id/layout_detail"
             layout="@layout/layout_detail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_genres" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.26" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.36" />
+            app:layout_constraintTop_toBottomOf="@+id/layout_genres"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

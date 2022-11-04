@@ -2,13 +2,15 @@ package com.tmdb.android.ui.detail
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.tmdb.android.R
 import com.tmdb.android.databinding.FragmentMovieDetailBinding
 import com.tmdb.android.domain.model.Movie
-import com.tmdb.android.ui.adapter.GenreListAdapter
+import com.tmdb.android.ui.adapter.GenreDetailAdapter
+import com.tmdb.android.utils.Resource
 import com.tmdb.android.utils.loadPhotoUrl
 import com.tmdb.android.utils.withDateFormat
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,27 +23,27 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
     private val viewModel: MovieDetailViewModel by viewModels()
 
     private val args by navArgs<MovieDetailFragmentArgs>()
-    private lateinit var genreListAdapter: GenreListAdapter
+    private lateinit var genreDetailAdapter: GenreDetailAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMovieDetailBinding.bind(view)
 
         setupRecyclerView()
-        showDetails(args.movie)
-        observeData()
+        observeData(args.movie)
     }
 
     private fun setupRecyclerView() {
-        genreListAdapter = GenreListAdapter(viewModel, viewLifecycleOwner)
+        genreDetailAdapter = GenreDetailAdapter()
+        binding.layoutGenres.rvGenre.adapter = genreDetailAdapter
     }
 
     private fun showDetails(data: Movie) {
-        viewModel.setVideos(data.id)
         binding.apply {
             ivBackdrop.loadPhotoUrl(data.backdropPathUrl())
             ivPoster.loadPhotoUrl(data.posterPathUrl())
             tvTitle.text = data.title
+            layoutDetail.root.isVisible = true
             layoutDetail.tvOverview.text = data.overview
             layoutDetail.tvReleaseDate.text = data.releaseDate.withDateFormat()
             layoutDetail.tvAverageRating.text = data.voteAverage.toString()
@@ -50,8 +52,17 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
         }
     }
 
-    private fun observeData() {
-        viewModel.getVideos.observe(viewLifecycleOwner) {
+    private fun observeData(data:Movie) {
+        viewModel.setVideos(data.id)
+        viewModel.getVideos.observe(viewLifecycleOwner) { result ->
+            when(result){
+                is Resource.Loading->{}
+                is Resource.Success->{
+                    genreDetailAdapter.submitList(result.data?.genres)
+                    showDetails(data)
+                }
+                is Resource.Error->{}
+            }
         }
     }
 
