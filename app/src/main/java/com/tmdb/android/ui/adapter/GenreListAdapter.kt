@@ -37,6 +37,7 @@ class GenreListAdapter(
                     viewModel.setMovieByGenre(data.id)
                 }
 
+
                 viewModel.getGenreId.observe(lifecycleOwner) { genreId ->
                     if (genreId == data.id) {
                         itemView.context.activeButton(btnGenres)
