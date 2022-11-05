@@ -114,6 +114,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.navigateToDetail.observe(viewLifecycleOwner, EventObserver {
             findNavController().navigate(HomeFragmentDirections.toMovieDetailFragment(it))
         })
+        binding.layoutHome.searchView.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.toSearchFragment())
+        }
     }
 
     override fun onDestroyView() {
