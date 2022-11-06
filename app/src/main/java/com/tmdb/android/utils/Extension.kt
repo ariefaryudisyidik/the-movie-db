@@ -77,7 +77,7 @@ fun String.withDateFormat(): String {
 fun View.showKeyboard() {
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     GlobalScope.launch {
-        delay(10)
+        delay(50)
         imm.showSoftInput(this@showKeyboard, 0)
     }
 }

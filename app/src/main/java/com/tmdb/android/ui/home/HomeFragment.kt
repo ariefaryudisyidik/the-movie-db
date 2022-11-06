@@ -31,7 +31,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         setupRecyclerView()
         observeData()
-//        searchMovies()
         refresh()
         navigation()
     }
@@ -63,10 +62,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
 
-        viewModel.getSearchMovies.observe(viewLifecycleOwner) {
-            viewModel.getTopRatedMovie.postValue(it)
-        }
-
         viewModel.getMovieByGenre.observe(viewLifecycleOwner) {
             viewModel.getTopRatedMovie.postValue(it)
         }
@@ -75,22 +70,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             movieListAdapter.submitData(lifecycle, it)
         }
     }
-
-//    private fun searchMovies() {
-//        binding.layoutHome.searchView.setOnQueryTextListener(object :
-//            SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String): Boolean {
-//                viewModel.setSearchMovies(query)
-//                requireActivity().window.decorView.clearFocus()
-//                return true
-//            }
-//
-//            override fun onQueryTextChange(query: String): Boolean {
-//                if (query != "") viewModel.setSearchMovies(query)
-//                return true
-//            }
-//        })
-//    }
 
     private fun layoutNetworkState(state: Boolean) {
         binding.layoutHome.root.isVisible = state
@@ -102,7 +81,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             refresh.setOnRefreshListener {
                 viewModel.setTopRatedMovie()
                 observeData()
-//                layoutHome.searchView.setQuery(null, false)
                 requireActivity().window.decorView.clearFocus()
                 refresh.isRefreshing = false
             }
