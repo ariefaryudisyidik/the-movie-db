@@ -2,7 +2,6 @@ package com.tmdb.android.ui.home
 
 import android.os.Bundle
 import android.view.View
-import android.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -32,7 +31,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         setupRecyclerView()
         observeData()
-        searchMovies()
+//        searchMovies()
         refresh()
         navigation()
     }
@@ -77,21 +76,21 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    private fun searchMovies() {
-        binding.layoutHome.searchView.setOnQueryTextListener(object :
-            SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                viewModel.setSearchMovies(query)
-                requireActivity().window.decorView.clearFocus()
-                return true
-            }
-
-            override fun onQueryTextChange(query: String): Boolean {
-                if (query != "") viewModel.setSearchMovies(query)
-                return true
-            }
-        })
-    }
+//    private fun searchMovies() {
+//        binding.layoutHome.searchView.setOnQueryTextListener(object :
+//            SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String): Boolean {
+//                viewModel.setSearchMovies(query)
+//                requireActivity().window.decorView.clearFocus()
+//                return true
+//            }
+//
+//            override fun onQueryTextChange(query: String): Boolean {
+//                if (query != "") viewModel.setSearchMovies(query)
+//                return true
+//            }
+//        })
+//    }
 
     private fun layoutNetworkState(state: Boolean) {
         binding.layoutHome.root.isVisible = state
@@ -103,7 +102,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             refresh.setOnRefreshListener {
                 viewModel.setTopRatedMovie()
                 observeData()
-                layoutHome.searchView.setQuery(null, false)
+//                layoutHome.searchView.setQuery(null, false)
                 requireActivity().window.decorView.clearFocus()
                 refresh.isRefreshing = false
             }
@@ -114,7 +113,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.navigateToDetail.observe(viewLifecycleOwner, EventObserver {
             findNavController().navigate(HomeFragmentDirections.toMovieDetailFragment(it))
         })
-        binding.layoutHome.searchView.setOnClickListener {
+        binding.layoutHome.edtSearch.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.toSearchFragment())
         }
     }

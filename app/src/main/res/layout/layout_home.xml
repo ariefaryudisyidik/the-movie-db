@@ -24,8 +24,8 @@
         android:layout_weight="1"
         android:text="@string/genres"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/searchView"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintStart_toStartOf="@+id/til_search"
+        app:layout_constraintTop_toBottomOf="@+id/til_search" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_genre"
@@ -56,18 +56,26 @@
         app:layout_constraintTop_toBottomOf="@+id/rv_genre"
         tools:listitem="@layout/item_movie" />
 
-    <SearchView
-        android:id="@+id/searchView"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_search"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/bg_search"
-        android:closeIcon="@drawable/ic_close_circle"
-        android:searchIcon="@drawable/ic_search"
-        android:theme="@style/SearchView"
+        android:textColorHint="@color/white_1"
+        android:theme="@style/TextInputLayout"
+        app:boxBackgroundColor="@color/black_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:startIconTint="@color/white_1">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:hint="@string/search_here" />
+    </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
