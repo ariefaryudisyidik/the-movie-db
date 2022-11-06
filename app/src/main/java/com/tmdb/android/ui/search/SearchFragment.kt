@@ -1,7 +1,10 @@
 package com.tmdb.android.ui.search
 
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -23,14 +26,72 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private lateinit var movieListAdapter: MovieListAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.setQuery(true)
+        Log.d(TAG, "1 onCreate")
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        Log.d(TAG, "2 onCreateView")
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentSearchBinding.bind(view)
 
         setupRecyclerView()
-        searchMovies()
+//        searchMovies()
         observeData()
         navigation()
+        Log.d(TAG, "3 onViewCreated")
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        searchMovies()
+        Log.d(TAG, "4 onViewStateRestored")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "5 onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "6 onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "7 onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "8 onStop")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.d(TAG, "9 onSaveInstanceState")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+        Log.d(TAG, "10 onDestroyView")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "11 onDestroy")
     }
 
     private fun setupRecyclerView() {
@@ -47,7 +108,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             movieListAdapter.submitData(lifecycle, it)
         }
 
-        viewModel.setQuery(true)
         viewModel.getQuery.observe(viewLifecycleOwner) { isEmpty ->
             if (isEmpty) {
                 binding.searchView.requestFocus()
@@ -66,7 +126,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             }
 
             override fun onQueryTextChange(query: String): Boolean {
-                if (query!="") viewModel.setQuery(false)
+                if (query != "") {
+                    viewModel.setSearchMovies(query)
+                    viewModel.setQuery(false)
+                }
                 return true
             }
         })
@@ -78,9 +141,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         })
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    companion object {
+        const val TAG = "SearchFragment"
     }
-
 }
