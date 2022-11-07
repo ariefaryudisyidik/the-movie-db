@@ -10,6 +10,7 @@ import com.tmdb.android.R
 import com.tmdb.android.databinding.FragmentMovieDetailBinding
 import com.tmdb.android.domain.model.Movie
 import com.tmdb.android.ui.adapter.GenreDetailAdapter
+import com.tmdb.android.ui.adapter.ReviewListAdapter
 import com.tmdb.android.ui.adapter.VideoListAdapter
 import com.tmdb.android.utils.Resource
 import com.tmdb.android.utils.loadPhotoUrl
@@ -26,6 +27,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
     private val args by navArgs<MovieDetailFragmentArgs>()
     private lateinit var genreDetailAdapter: GenreDetailAdapter
     private lateinit var videoListAdapter: VideoListAdapter
+    private lateinit var reviewListAdapter: ReviewListAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,6 +43,9 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
 
         videoListAdapter = VideoListAdapter()
         binding.layoutVideo.rvVideo.adapter = videoListAdapter
+
+        reviewListAdapter = ReviewListAdapter()
+        binding.layoutReview.rvReview.adapter = reviewListAdapter
     }
 
     private fun showDetails(data: Movie) {
@@ -50,7 +55,6 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
             tvTitle.text = data.title
             layoutDetail.root.isVisible = true
             layoutVideo.root.isVisible = true
-            layoutReview.root.isVisible = true
             layoutDetail.tvOverview.text = data.overview
             layoutDetail.tvReleaseDate.text = data.releaseDate.withDateFormat()
             layoutDetail.tvAverageRating.text = data.voteAverage.toString()
@@ -68,6 +72,20 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
                     genreDetailAdapter.submitList(result.data?.genres)
                     videoListAdapter.submitList(result.data?.videos?.results)
                     showDetails(data)
+                }
+                is Resource.Error -> {}
+            }
+        }
+
+        viewModel.setReviews(data.id)
+        viewModel.getReviews.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Resource.Loading -> {}
+                is Resource.Success -> {
+                    if (result.data?.isNotEmpty() == true) {
+                        binding.layoutReview.root.isVisible = true
+                        reviewListAdapter.submitList(result.data)
+                    }
                 }
                 is Resource.Error -> {}
             }

@@ -2,6 +2,7 @@ package com.tmdb.android.data.remote.api
 
 import com.tmdb.android.data.remote.response.GenreResponse
 import com.tmdb.android.data.remote.response.MovieResponse
+import com.tmdb.android.data.remote.response.ReviewResponse
 import com.tmdb.android.data.remote.response.VideoResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -49,4 +50,9 @@ interface MovieApi {
         @Path("movie_id") movieId: Int,
         @Query("append_to_response") videos: String = "videos"
     ): VideoResponse
+
+    @GET("movie/{movie_id}/reviews")
+    suspend fun getReviews(
+        @Path("movie_id") movieId: Int,
+    ): ReviewResponse
 }

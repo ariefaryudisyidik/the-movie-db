@@ -53,7 +53,7 @@ fun Context.inactiveButton(button: Button) {
 }
 
 fun ImageView.loadPhotoUrl(
-    url: String,
+    url: String?,
 ) {
     Glide.with(context)
         .load(url)

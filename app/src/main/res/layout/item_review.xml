@@ -8,40 +8,40 @@
     android:paddingBottom="16dp">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/iv_profile"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/CircleImage"
-        app:srcCompat="@drawable/img_profile" />
+        tools:srcCompat="@drawable/img_profile" />
 
     <TextView
-        android:id="@+id/tv_title2"
+        android:id="@+id/tv_name"
         style="@style/Text.Medium"
         android:layout_marginStart="16dp"
         android:paddingHorizontal="8dp"
         android:textColor="@color/white_1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/iv_profile"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/dummy_name" />
 
     <TextView
-        android:id="@+id/tv_title4"
+        android:id="@+id/tv_rating"
         style="@style/Text.Medium"
         android:layout_marginTop="4dp"
         android:gravity="center"
         android:paddingHorizontal="8dp"
         android:textColor="@color/green_2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="@+id/iv_profile"
+        app:layout_constraintStart_toStartOf="@+id/iv_profile"
+        app:layout_constraintTop_toBottomOf="@+id/iv_profile"
         tools:text="@string/dummy_rating" />
 
     <TextView
-        android:id="@+id/tv_title3"
+        android:id="@+id/tv_content"
         style="@style/Text.Regular"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
@@ -50,8 +50,8 @@
         android:paddingHorizontal="8dp"
         android:textColor="@color/white_1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title2"
+        app:layout_constraintStart_toEndOf="@+id/iv_profile"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name"
         tools:text="@string/dummy_review" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,13 +9,13 @@
         android:id="@+id/rv_genre"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:spanCount="4"
         android:paddingHorizontal="12dp"
         app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_genre"/>
+        app:spanCount="4"
+        tools:listitem="@layout/item_genre" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

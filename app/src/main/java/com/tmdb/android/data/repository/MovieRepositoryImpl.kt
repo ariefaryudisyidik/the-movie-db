@@ -10,6 +10,7 @@ import com.tmdb.android.data.paging.SearchMoviesPagingSource
 import com.tmdb.android.data.paging.TopRatedMoviePagingSource
 import com.tmdb.android.data.remote.api.MovieApi
 import com.tmdb.android.data.remote.response.GenreResponse
+import com.tmdb.android.data.remote.response.ReviewResponse
 import com.tmdb.android.data.remote.response.VideoResponse
 import com.tmdb.android.domain.model.Movie
 import com.tmdb.android.utils.PAGE_SIZE
@@ -46,5 +47,9 @@ class MovieRepositoryImpl @Inject constructor(
 
     override suspend fun getVideos(movieId: Int): VideoResponse {
         return api.getVideos(movieId)
+    }
+
+    override suspend fun getReviews(movieId: Int): ReviewResponse {
+        return api.getReviews(movieId)
     }
 }
