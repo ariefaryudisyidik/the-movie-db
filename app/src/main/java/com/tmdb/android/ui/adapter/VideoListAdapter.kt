@@ -1,5 +1,7 @@
 package com.tmdb.android.ui.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -7,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.tmdb.android.data.remote.response.VideoResult
 import com.tmdb.android.databinding.ItemVideoBinding
+import com.tmdb.android.utils.YOUTUBE_URL
 import com.tmdb.android.utils.loadPhotoUrl
 
 class VideoListAdapter : ListAdapter<VideoResult, VideoListAdapter.ViewHolder>(DIFF_CALLBACK) {
@@ -27,6 +30,11 @@ class VideoListAdapter : ListAdapter<VideoResult, VideoListAdapter.ViewHolder>(D
             binding.apply {
                 tvTitle.text = data.name
                 ivVideo.loadPhotoUrl(data.thumbnailPathUrl())
+                root.setOnClickListener {
+                    val url = Uri.parse(YOUTUBE_URL + data.key)
+                    val intent = Intent(Intent.ACTION_VIEW, url)
+                    itemView.context.startActivity(intent)
+                }
             }
         }
     }
