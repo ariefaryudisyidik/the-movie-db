@@ -6,12 +6,13 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.chip.Chip
 import com.tmdb.android.R
 import com.tmdb.android.databinding.FragmentMovieDetailBinding
 import com.tmdb.android.domain.model.Movie
-import com.tmdb.android.ui.adapter.GenreDetailAdapter
 import com.tmdb.android.ui.adapter.ReviewListAdapter
 import com.tmdb.android.ui.adapter.VideoListAdapter
+import com.tmdb.android.utils.EventObserver
 import com.tmdb.android.utils.Resource
 import com.tmdb.android.utils.loadPhotoUrl
 import com.tmdb.android.utils.withDateFormat
@@ -25,7 +26,6 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
     private val viewModel: MovieDetailViewModel by viewModels()
 
     private val args by navArgs<MovieDetailFragmentArgs>()
-    private lateinit var genreDetailAdapter: GenreDetailAdapter
     private lateinit var videoListAdapter: VideoListAdapter
     private lateinit var reviewListAdapter: ReviewListAdapter
 
@@ -34,13 +34,15 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
         _binding = FragmentMovieDetailBinding.bind(view)
 
         setupRecyclerView()
+        setupChipGroup()
         observeData(args.movie)
     }
 
-    private fun setupRecyclerView() {
-        genreDetailAdapter = GenreDetailAdapter()
-        binding.layoutGenre.rvGenre.adapter = genreDetailAdapter
+    private fun setupChipGroup() {
 
+    }
+
+    private fun setupRecyclerView() {
         videoListAdapter = VideoListAdapter()
         binding.layoutVideo.rvVideo.adapter = videoListAdapter
 
@@ -53,18 +55,21 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
             ivBackdrop.loadPhotoUrl(data.backdropPathUrl())
             ivPoster.loadPhotoUrl(data.posterPathUrl())
             tvTitle.text = data.title
-            layoutDetail.root.isVisible = true
-            layoutDetail.tvOverview.text = data.overview
-            layoutDetail.tvReleaseDate.text = data.releaseDate.withDateFormat()
-            layoutDetail.tvAverageRating.text = data.voteAverage.toString()
-            layoutDetail.tvRateCount.text = data.voteCount.toString()
-            layoutDetail.tvPopularity.text = data.popularity.toString()
+        }
+
+        binding.layoutDetail.apply {
+            root.isVisible = true
+            tvOverview.text = data.overview
+            tvReleaseDate.text = data.releaseDate.withDateFormat()
+            tvAverageRating.text = data.voteAverage.toString()
+            tvRateCount.text = data.voteCount.toString()
+            tvPopularity.text = data.popularity.toString()
         }
     }
 
     private fun observeData(data: Movie) {
         viewModel.setVideos(data.id)
-        viewModel.getVideos.observe(viewLifecycleOwner) { result ->
+        viewModel.getVideos.observe(viewLifecycleOwner, EventObserver { result ->
             when (result) {
                 is Resource.Loading -> {}
                 is Resource.Success -> {
@@ -72,12 +77,18 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
                         binding.layoutVideo.root.isVisible = true
                         videoListAdapter.submitList(result.data.videos.results)
                     }
-                    genreDetailAdapter.submitList(result.data?.genres)
+
+                    result.data?.genres?.forEach {
+                        val chip = Chip(requireContext())
+                        chip.text = it.name
+                        binding.layoutGenre.chipGroup.addView(chip)
+                    }
+
                     showDetails(data)
                 }
                 is Resource.Error -> {}
             }
-        }
+        })
 
         viewModel.setReviews(data.id)
         viewModel.getReviews.observe(viewLifecycleOwner) { result ->
