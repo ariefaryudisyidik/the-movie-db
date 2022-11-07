@@ -10,6 +10,7 @@ import com.tmdb.android.R
 import com.tmdb.android.databinding.FragmentMovieDetailBinding
 import com.tmdb.android.domain.model.Movie
 import com.tmdb.android.ui.adapter.GenreDetailAdapter
+import com.tmdb.android.ui.adapter.VideoListAdapter
 import com.tmdb.android.utils.Resource
 import com.tmdb.android.utils.loadPhotoUrl
 import com.tmdb.android.utils.withDateFormat
@@ -24,6 +25,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
 
     private val args by navArgs<MovieDetailFragmentArgs>()
     private lateinit var genreDetailAdapter: GenreDetailAdapter
+    private lateinit var videoListAdapter: VideoListAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,7 +37,10 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
 
     private fun setupRecyclerView() {
         genreDetailAdapter = GenreDetailAdapter()
-        binding.layoutGenres.rvGenre.adapter = genreDetailAdapter
+        binding.layoutGenre.rvGenre.adapter = genreDetailAdapter
+
+        videoListAdapter = VideoListAdapter()
+        binding.layoutVideo.rvVideo.adapter = videoListAdapter
     }
 
     private fun showDetails(data: Movie) {
@@ -44,6 +49,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
             ivPoster.loadPhotoUrl(data.posterPathUrl())
             tvTitle.text = data.title
             layoutDetail.root.isVisible = true
+            layoutVideo.root.isVisible = true
             layoutDetail.tvOverview.text = data.overview
             layoutDetail.tvReleaseDate.text = data.releaseDate.withDateFormat()
             layoutDetail.tvAverageRating.text = data.voteAverage.toString()
@@ -52,16 +58,17 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
         }
     }
 
-    private fun observeData(data:Movie) {
+    private fun observeData(data: Movie) {
         viewModel.setVideos(data.id)
         viewModel.getVideos.observe(viewLifecycleOwner) { result ->
-            when(result){
-                is Resource.Loading->{}
-                is Resource.Success->{
+            when (result) {
+                is Resource.Loading -> {}
+                is Resource.Success -> {
                     genreDetailAdapter.submitList(result.data?.genres)
+                    videoListAdapter.submitList(result.data?.videos?.results)
                     showDetails(data)
                 }
-                is Resource.Error->{}
+                is Resource.Error -> {}
             }
         }
     }

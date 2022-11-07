@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.tmdb.android.data.remote.response.VideoResult
 import com.tmdb.android.databinding.ItemVideoBinding
-import com.tmdb.android.domain.model.Video
 
-class VideoListAdapter : ListAdapter<Video, VideoListAdapter.ViewHolder>(DIFF_CALLBACK) {
+class VideoListAdapter : ListAdapter<VideoResult, VideoListAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemVideoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -22,7 +22,7 @@ class VideoListAdapter : ListAdapter<Video, VideoListAdapter.ViewHolder>(DIFF_CA
 
     inner class ViewHolder(private val binding: ItemVideoBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: Video) {
+        fun bind(data: VideoResult) {
             binding.apply {
                 tvTitle.text = data.name
             }
@@ -30,11 +30,11 @@ class VideoListAdapter : ListAdapter<Video, VideoListAdapter.ViewHolder>(DIFF_CA
     }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Video>() {
-            override fun areItemsTheSame(oldItem: Video, newItem: Video) =
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<VideoResult>() {
+            override fun areItemsTheSame(oldItem: VideoResult, newItem: VideoResult) =
                 oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: Video, newItem: Video) =
+            override fun areContentsTheSame(oldItem: VideoResult, newItem: VideoResult) =
                 oldItem == newItem
         }
     }
