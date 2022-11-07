@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingHorizontal="16dp"
-    android:paddingBottom="16dp">
+    android:paddingBottom="32dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_profile"
@@ -44,7 +44,6 @@
         android:id="@+id/tv_content"
         style="@style/Text.Regular"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
         android:ellipsize="end"
         android:maxLines="4"
         android:paddingHorizontal="8dp"
