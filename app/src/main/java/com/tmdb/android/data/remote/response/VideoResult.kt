@@ -17,7 +17,9 @@ data class VideoResult(
     @SerializedName("published_at")
     val publishedAt: String,
     val id: String
-)
+) {
+    fun thumbnailPathUrl() = "https://img.youtube.com/vi/$key/sddefault.jpg"
+}
 
 fun VideoResult.toDomain(): Video {
     return Video(

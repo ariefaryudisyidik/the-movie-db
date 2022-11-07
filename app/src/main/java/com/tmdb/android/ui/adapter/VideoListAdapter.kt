@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.tmdb.android.data.remote.response.VideoResult
 import com.tmdb.android.databinding.ItemVideoBinding
+import com.tmdb.android.utils.loadPhotoUrl
 
 class VideoListAdapter : ListAdapter<VideoResult, VideoListAdapter.ViewHolder>(DIFF_CALLBACK) {
 
@@ -25,6 +26,7 @@ class VideoListAdapter : ListAdapter<VideoResult, VideoListAdapter.ViewHolder>(D
         fun bind(data: VideoResult) {
             binding.apply {
                 tvTitle.text = data.name
+                ivVideo.loadPhotoUrl(data.thumbnailPathUrl())
             }
         }
     }

@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/textView"
-        style="@style/Text.Medium"
+        style="@style/Text.SemiBold"
         android:text="@string/about_movie"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
