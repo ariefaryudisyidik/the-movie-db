@@ -50,6 +50,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
             tvTitle.text = data.title
             layoutDetail.root.isVisible = true
             layoutVideo.root.isVisible = true
+            layoutReview.root.isVisible = true
             layoutDetail.tvOverview.text = data.overview
             layoutDetail.tvReleaseDate.text = data.releaseDate.withDateFormat()
             layoutDetail.tvAverageRating.text = data.voteAverage.toString()
