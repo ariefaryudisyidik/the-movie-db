@@ -6,15 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.tmdb.android.data.remote.response.Genre
-import com.tmdb.android.databinding.ItemGenresBinding
+import com.tmdb.android.databinding.ItemGenreBinding
 
 class GenreDetailAdapter :
-    ListAdapter<Genre, GenreDetailAdapter.ViewHolder>(
-        DIFF_CALLBACK
-    ) {
+    ListAdapter<Genre, GenreDetailAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemGenresBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemGenreBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -23,7 +21,7 @@ class GenreDetailAdapter :
         holder.bind(data)
     }
 
-    inner class ViewHolder(private val binding: ItemGenresBinding) :
+    inner class ViewHolder(private val binding: ItemGenreBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Genre) {
             binding.btnGenres.text = data.name

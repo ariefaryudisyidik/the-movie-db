@@ -27,4 +27,6 @@
     <string name="error_connection">No Internet Connection</string>
     <string name="error_unexpected">An unexpected error occurred</string>
     <string name="top_rated">Top Rated</string>
+    <string name="trailer">Trailer</string>
+    <string name="trailers">Trailers</string>
 </resources>

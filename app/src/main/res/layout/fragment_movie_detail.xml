@@ -57,6 +57,15 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_poster" />
 
         <include
+            android:id="@+id/layout_video"
+            layout="@layout/layout_video"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_genres" />
+
+        <include
             android:id="@+id/layout_detail"
             layout="@layout/layout_detail"
             android:layout_width="0dp"
@@ -65,7 +74,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_genres"
+            app:layout_constraintTop_toBottomOf="@id/layout_video"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
