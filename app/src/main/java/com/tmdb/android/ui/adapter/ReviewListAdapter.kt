@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tmdb.android.databinding.ItemReviewBinding
 import com.tmdb.android.domain.model.Review
 import com.tmdb.android.utils.IMAGE_URL
+import com.tmdb.android.utils.UI_AVATAR_URL
 import com.tmdb.android.utils.loadPhotoUrl
 
 class ReviewListAdapter : ListAdapter<Review, ReviewListAdapter.ViewHolder>(DIFF_CALLBACK) {
@@ -26,9 +27,16 @@ class ReviewListAdapter : ListAdapter<Review, ReviewListAdapter.ViewHolder>(DIFF
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Review) {
             binding.apply {
-                val avatarPath = data.authorDetails.avatarPath?.replace("/https", "https")
-                val avatarPath2 = IMAGE_URL + data.authorDetails.avatarPath
-                ivProfile.loadPhotoUrl(avatarPath2)
+                var avatarPath = data.authorDetails.avatarPath
+                avatarPath = if (avatarPath?.contains("/https") == true) {
+                    data.authorDetails.avatarPath?.replace("/https", "https")
+                } else if (avatarPath == null) {
+                    UI_AVATAR_URL + data.authorDetails.username
+                } else {
+                    IMAGE_URL + data.authorDetails.avatarPath
+
+                }
+                ivProfile.loadPhotoUrl(avatarPath)
                 tvName.text = data.authorDetails.username
                 tvContent.text = data.content
                 tvRating.text = data.authorDetails.rating.toString()
