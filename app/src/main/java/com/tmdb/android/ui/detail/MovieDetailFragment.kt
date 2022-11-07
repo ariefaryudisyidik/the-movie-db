@@ -78,9 +78,12 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
                         videoListAdapter.submitList(result.data.videos.results)
                     }
 
-                    result.data?.genres?.forEach {
-                        val chip = Chip(requireContext())
-                        chip.text = it.name
+                    result.data?.genres?.map {
+                        val chip = Chip(requireContext()).apply {
+                            text = it.name
+                            setChipBackgroundColorResource(R.color.black_2)
+                            setTextAppearanceResource(R.style.ChipTextStyle)
+                        }
                         binding.layoutGenre.chipGroup.addView(chip)
                     }
 

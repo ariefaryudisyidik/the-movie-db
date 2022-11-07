@@ -94,4 +94,12 @@
         <item name="android:textColorHint">@color/white_1</item>
         <item name="android:background">@drawable/bg_search</item>
     </style>
+
+    <!-- Chip -->
+    <style name="ChipTextStyle">
+        <item name="android:textColor">@color/white_1</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>
