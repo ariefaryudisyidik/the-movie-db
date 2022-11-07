@@ -54,7 +54,6 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
             ivPoster.loadPhotoUrl(data.posterPathUrl())
             tvTitle.text = data.title
             layoutDetail.root.isVisible = true
-            layoutVideo.root.isVisible = true
             layoutDetail.tvOverview.text = data.overview
             layoutDetail.tvReleaseDate.text = data.releaseDate.withDateFormat()
             layoutDetail.tvAverageRating.text = data.voteAverage.toString()
@@ -69,8 +68,11 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
             when (result) {
                 is Resource.Loading -> {}
                 is Resource.Success -> {
+                    if (result.data?.videos?.results?.isNotEmpty() == true) {
+                        binding.layoutVideo.root.isVisible = true
+                        videoListAdapter.submitList(result.data.videos.results)
+                    }
                     genreDetailAdapter.submitList(result.data?.genres)
-                    videoListAdapter.submitList(result.data?.videos?.results)
                     showDetails(data)
                 }
                 is Resource.Error -> {}

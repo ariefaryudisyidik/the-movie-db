@@ -40,6 +40,8 @@
             style="@style/Text.SemiBold"
             android:layout_marginHorizontal="16dp"
             android:textSize="18sp"
+            android:maxLines="3"
+            android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="@+id/iv_poster"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_poster"
