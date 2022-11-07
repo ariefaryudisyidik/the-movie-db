@@ -20,18 +20,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val searchMoviesUseCase: SearchMoviesUseCase,
     private val getGenresUseCase: GetGenresUseCase,
     private val getTopRatedMovieUseCase: GetTopRatedMovieUseCase,
     private val getMovieByGenreUseCase: GetMovieByGenreUseCase,
 ) : ViewModel() {
-
-    val getSearchMovies = MutableLiveData<PagingData<Movie>>()
-    fun setSearchMovies(query: String) = viewModelScope.launch {
-        searchMoviesUseCase(query).cachedIn(viewModelScope).asFlow().collect {
-            getSearchMovies.postValue(it)
-        }
-    }
 
     val getGenres = MutableLiveData<Resource<List<Genre>>>()
     fun setGenres() = viewModelScope.launch {
@@ -40,12 +32,12 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    val getTopRatedMovie = MutableLiveData<PagingData<Movie>>()
-    fun setTopRatedMovie() = viewModelScope.launch {
-        getTopRatedMovieUseCase().cachedIn(viewModelScope).asFlow().collect {
-            getTopRatedMovie.postValue(it)
-        }
-    }
+//    val getTopRatedMovie = MutableLiveData<PagingData<Movie>>()
+//    fun setTopRatedMovie() = viewModelScope.launch {
+//        getTopRatedMovieUseCase().cachedIn(viewModelScope).asFlow().collect {
+//            getTopRatedMovie.postValue(it)
+//        }
+//    }
 
     val getGenreId = MutableLiveData<Int>()
     val getMovieByGenre = MutableLiveData<PagingData<Movie>>()
@@ -61,9 +53,5 @@ class HomeViewModel @Inject constructor(
     val navigateToDetail = MutableLiveData<Event<Movie>>()
     fun onMovieClicked(movie: Movie) {
         navigateToDetail.postValue(Event(movie))
-    }
-
-    init {
-        setTopRatedMovie()
     }
 }

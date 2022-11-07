@@ -25,6 +25,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var genreListAdapter: GenreListAdapter
     private lateinit var movieListAdapter: MovieListAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.setMovieByGenre(28)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentHomeBinding.bind(view)
@@ -63,10 +68,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         viewModel.getMovieByGenre.observe(viewLifecycleOwner) {
-            viewModel.getTopRatedMovie.postValue(it)
-        }
-
-        viewModel.getTopRatedMovie.observe(viewLifecycleOwner) {
             movieListAdapter.submitData(lifecycle, it)
         }
     }
@@ -79,7 +80,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun refresh() {
         binding.apply {
             refresh.setOnRefreshListener {
-                viewModel.setTopRatedMovie()
+                viewModel.setMovieByGenre(28)
                 observeData()
                 requireActivity().window.decorView.clearFocus()
                 refresh.isRefreshing = false
