@@ -36,8 +36,9 @@ class ReviewListAdapter : ListAdapter<Review, ReviewListAdapter.ViewHolder>(DIFF
                     IMAGE_URL + data.authorDetails.avatarPath
 
                 }
+
                 ivProfile.loadPhotoUrl(avatarPath)
-                tvName.text = data.authorDetails.username
+                tvName.text = data.author
                 tvContent.text = data.content
                 tvRating.text = data.authorDetails.rating.toString()
             }
