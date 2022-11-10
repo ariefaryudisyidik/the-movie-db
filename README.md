@@ -58,4 +58,4 @@ base_url=https://api.themoviedb.org/3/
 [16]: https://developer.android.com/develop/ui/views/launch/splash-screen
 [17]: https://developers.google.com/maps/documentation/android-sdk/secrets-gradle-plugin
 
-![App Preview](https://user-images.githubusercontent.com/59298779/195646737-7f5bc93f-91c4-43c8-9fb7-554303f5a7c4.png)
+![App Preview](https://user-images.githubusercontent.com/59298779/200995848-2275d7c8-1619-42dc-bc04-3687d0219757.png)
