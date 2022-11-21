@@ -11,7 +11,6 @@ import com.tmdb.android.domain.model.Movie
 import com.tmdb.android.domain.usecase.movie.GetGenresUseCase
 import com.tmdb.android.domain.usecase.movie.GetMovieByGenreUseCase
 import com.tmdb.android.domain.usecase.movie.GetTopRatedMovieUseCase
-import com.tmdb.android.domain.usecase.movie.SearchMoviesUseCase
 import com.tmdb.android.utils.Event
 import com.tmdb.android.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
