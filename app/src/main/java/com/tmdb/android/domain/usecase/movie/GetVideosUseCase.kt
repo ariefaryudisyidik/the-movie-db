@@ -3,7 +3,7 @@ package com.tmdb.android.domain.usecase.movie
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.tmdb.android.data.remote.response.VideoResponse
-import com.tmdb.android.data.repository.MovieRepository
+import com.tmdb.android.domain.repository.MovieRepository
 import com.tmdb.android.utils.Resource
 import javax.inject.Inject
 

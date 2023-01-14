@@ -1,8 +1,8 @@
 package com.tmdb.android.di
 
 import com.tmdb.android.data.remote.api.MovieApi
-import com.tmdb.android.data.repository.MovieRepository
 import com.tmdb.android.data.repository.MovieRepositoryImpl
+import com.tmdb.android.domain.repository.MovieRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

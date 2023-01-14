@@ -13,6 +13,7 @@ import com.tmdb.android.data.remote.response.GenreResponse
 import com.tmdb.android.data.remote.response.ReviewResponse
 import com.tmdb.android.data.remote.response.VideoResponse
 import com.tmdb.android.domain.model.Movie
+import com.tmdb.android.domain.repository.MovieRepository
 import com.tmdb.android.utils.PAGE_SIZE
 import javax.inject.Inject
 
