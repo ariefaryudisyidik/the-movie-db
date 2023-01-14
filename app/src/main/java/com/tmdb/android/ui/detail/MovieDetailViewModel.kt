@@ -2,7 +2,6 @@ package com.tmdb.android.ui.detail
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import com.tmdb.android.data.remote.response.VideoResponse
 import com.tmdb.android.domain.model.Review
@@ -11,7 +10,8 @@ import com.tmdb.android.domain.usecase.movie.GetVideosUseCase
 import com.tmdb.android.utils.Event
 import com.tmdb.android.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,16 +21,12 @@ class MovieDetailViewModel @Inject constructor(
 ) : ViewModel() {
 
     val getVideos = MutableLiveData<Event<Resource<VideoResponse>>>()
-    fun setVideos(movieId: Int) = viewModelScope.launch {
-        getVideosUseCase(movieId).asFlow().collect {
-            getVideos.postValue(Event(it))
-        }
-    }
+    fun setVideos(movieId: Int) = getVideosUseCase.invoke(movieId).onEach {
+        getVideos.postValue(Event(it))
+    }.launchIn(viewModelScope)
 
     val getReviews = MutableLiveData<Resource<List<Review>>>()
-    fun setReviews(movieId: Int) = viewModelScope.launch {
-        getReviewsUseCase(movieId).asFlow().collect {
-            getReviews.postValue(it)
-        }
-    }
+    fun setReviews(movieId: Int) = getReviewsUseCase.invoke(movieId).onEach {
+        getReviews.postValue(it)
+    }.launchIn(viewModelScope)
 }
