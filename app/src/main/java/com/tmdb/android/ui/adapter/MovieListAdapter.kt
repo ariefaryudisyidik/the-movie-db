@@ -29,9 +29,9 @@ class MovieListAdapter(private var onDetailClick: (Movie) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Movie) {
             binding.apply {
+                tvReleaseDate.text = data.releaseDate.withDateFormat()
                 ivPoster.loadPhotoUrl(data.posterPathUrl())
                 tvTitle.text = data.title
-                tvReleaseDate.text = data.releaseDate.withDateFormat()
                 tvAverageRating.text = data.voteAverage.toString()
                 tvReadMore.setOnClickListener { onDetailClick(data) }
             }
@@ -40,13 +40,11 @@ class MovieListAdapter(private var onDetailClick: (Movie) -> Unit) :
 
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Movie>() {
-            override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-                return oldItem.id == newItem.id
-            }
+            override fun areItemsTheSame(oldItem: Movie, newItem: Movie) =
+                oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-                return oldItem == newItem
-            }
+            override fun areContentsTheSame(oldItem: Movie, newItem: Movie) =
+                oldItem == newItem
         }
     }
 }

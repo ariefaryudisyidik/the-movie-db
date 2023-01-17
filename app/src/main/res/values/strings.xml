@@ -12,6 +12,8 @@
     <string name="read_more">Read More</string>
 
     <string name="find_your_movies">Find your movies</string>
+    <string name="genres">Genres</string>
+    <string name="search_here">Search Here …</string>
     <string name="about_movie">About Movie</string>
     <string name="retry">Retry</string>
 
@@ -21,4 +23,14 @@
     <string name="dummy_overview">Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man</string>
     <string name="dummy_rate_count">11747</string>
     <string name="dummy_popularity">9695.89</string>
+    <string name="dummy_name">John Doe</string>
+    <string name="dummy_review">From DC Comics comes the Suicide Squad, an antihero team of incarcerated supervillains who act as deniable assets for the United States government.</string>
+    <string name="dummy_rating">5.0</string>
+
+    <string name="error_connection">No Internet Connection</string>
+    <string name="error_unexpected">An unexpected error occurred</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="trailer">Trailer</string>
+    <string name="trailers">Trailers</string>
+    <string name="reviews">Reviews</string>
 </resources>

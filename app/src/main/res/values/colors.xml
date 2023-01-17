@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="aquamarine">#85FFD4</color>
-    <color name="eucalyptus">#4FCCA3</color>
-    <color name="paolo_veronese_green">#009A74</color>
+    <color name="green_1">#85FFD4</color>
+    <color name="green_2">#4FCCA3</color>
+    <color name="green_3">#009A74</color>
 
-    <color name="charleston_green">#242A32</color>
-    <color name="davy_grey">#4C525B</color>
-    <color name="rich_black">#00000A</color>
-
+    <color name="black_1">#4C525B</color>
+    <color name="black_2">#3A3F47</color>
+    <color name="black_3">#242A32</color>
+    <color name="black_4">#00000A</color>
     <color name="black">#000000</color>
+    <color name="transparent_black">#B3000000</color>
+
+    <color name="white_1">#EEEEEE</color>
     <color name="white">#FFFFFF</color>
 </resources>

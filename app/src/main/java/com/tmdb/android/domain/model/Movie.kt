@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 import com.tmdb.android.utils.IMAGE_URL
 import kotlinx.parcelize.Parcelize
 
-@Entity(tableName = "movie")
 @Parcelize
+@Entity(tableName = "movie")
 data class Movie(
     @PrimaryKey
     val id: Int,

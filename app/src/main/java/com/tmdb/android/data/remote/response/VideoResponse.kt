@@ -1,16 +1,17 @@
 package com.tmdb.android.data.remote.response
 
-
 import com.google.gson.annotations.SerializedName
-import com.tmdb.android.domain.model.Movie
 
-data class Result(
+data class VideoResponse(
     val adult: Boolean,
     @SerializedName("backdrop_path")
     val backdropPath: String,
-    @SerializedName("genre_ids")
-    val genreIds: List<Int>,
+    val budget: Int,
+    val genres: List<Genre>,
+    val homepage: String,
     val id: Int,
+    @SerializedName("imdb_id")
+    val imdbId: String,
     @SerializedName("original_language")
     val originalLanguage: String,
     @SerializedName("original_title")
@@ -21,25 +22,15 @@ data class Result(
     val posterPath: String,
     @SerializedName("release_date")
     val releaseDate: String,
+    val revenue: Int,
+    val runtime: Int,
+    val status: String,
+    val tagline: String,
     val title: String,
     val video: Boolean,
     @SerializedName("vote_average")
     val voteAverage: Double,
     @SerializedName("vote_count")
-    val voteCount: Int
+    val voteCount: Int,
+    val videos: Videos
 )
-
-fun Result.toDomain(): Movie {
-    return Movie(
-        backdropPath = backdropPath,
-        id = id,
-        originalTitle = originalTitle,
-        overview = overview,
-        popularity = popularity,
-        posterPath = posterPath,
-        releaseDate = releaseDate,
-        title = title,
-        voteAverage = voteAverage,
-        voteCount = voteCount
-    )
-}

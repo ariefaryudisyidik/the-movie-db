@@ -3,7 +3,7 @@ package com.tmdb.android.di
 import androidx.viewbinding.BuildConfig
 import com.tmdb.android.BuildConfig.API_KEY
 import com.tmdb.android.BuildConfig.BASE_URL
-import com.tmdb.android.data.remote.ApiService
+import com.tmdb.android.data.remote.api.MovieApi
 import com.tmdb.android.utils.QUERY_API_KEY
 import dagger.Module
 import dagger.Provides
@@ -21,7 +21,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideApiService(): ApiService {
+    fun provideApiService(): MovieApi {
         val logger = HttpLoggingInterceptor().apply {
             if (BuildConfig.DEBUG) setLevel(HttpLoggingInterceptor.Level.BODY)
             else setLevel(HttpLoggingInterceptor.Level.NONE)
@@ -37,14 +37,13 @@ class NetworkModule {
                     .build()
                 request = request.newBuilder().url(url).build()
                 chain.proceed(request)
-            }
-            .build()
+            }.build()
 
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
-            .create(ApiService::class.java)
+            .create(MovieApi::class.java)
     }
 }

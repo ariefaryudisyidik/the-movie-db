@@ -1,29 +1,55 @@
 package com.tmdb.android.data.repository
 
-import androidx.lifecycle.LiveData
-import androidx.paging.*
-import com.tmdb.android.data.local.MovieDatabase
-import com.tmdb.android.data.remote.ApiService
-import com.tmdb.android.data.remote.MovieRemoteMediator
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.tmdb.android.data.paging.MovieByGenrePagingSource
+import com.tmdb.android.data.paging.SearchMoviesPagingSource
+import com.tmdb.android.data.paging.TopRatedMoviePagingSource
+import com.tmdb.android.data.remote.api.MovieApi
+import com.tmdb.android.data.remote.response.GenreResponse
+import com.tmdb.android.data.remote.response.ReviewResponse
+import com.tmdb.android.data.remote.response.VideoResponse
 import com.tmdb.android.domain.model.Movie
 import com.tmdb.android.domain.repository.MovieRepository
+import com.tmdb.android.utils.PAGE_SIZE
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
-    private val database: MovieDatabase,
-    private val api: ApiService
+    private val api: MovieApi
 ) : MovieRepository {
 
-    @OptIn(ExperimentalPagingApi::class)
-    override fun getMovie(): LiveData<PagingData<Movie>> {
+    override fun searchMovies(query: String): Flow<PagingData<Movie>> {
         return Pager(
-            config = PagingConfig(
-                pageSize = 5
-            ),
-            remoteMediator = MovieRemoteMediator(database, api),
-            pagingSourceFactory = {
-                database.movieDao().getAllMovie()
-            }
-        ).liveData
+            config = PagingConfig(pageSize = PAGE_SIZE),
+            pagingSourceFactory = { SearchMoviesPagingSource(api, query) }
+        ).flow
+    }
+
+    override fun getTopRatedMovie(): Flow<PagingData<Movie>> {
+        return Pager(
+            config = PagingConfig(pageSize = PAGE_SIZE),
+            pagingSourceFactory = { TopRatedMoviePagingSource(api) }
+        ).flow
+    }
+
+    override fun getMovieByGenre(genreId: Int): Flow<PagingData<Movie>> {
+        return Pager(
+            config = PagingConfig(pageSize = PAGE_SIZE),
+            pagingSourceFactory = { MovieByGenrePagingSource(api, genreId) }
+        ).flow
+    }
+
+    override suspend fun getGenres(): GenreResponse {
+        return api.getGenres()
+    }
+
+    override suspend fun getVideos(movieId: Int): VideoResponse {
+        return api.getVideos(movieId)
+    }
+
+    override suspend fun getReviews(movieId: Int): ReviewResponse {
+        return api.getReviews(movieId)
     }
 }
