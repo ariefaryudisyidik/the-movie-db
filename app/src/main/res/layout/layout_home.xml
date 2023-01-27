@@ -65,6 +65,7 @@
         android:textColorHint="@color/white_1"
         android:theme="@style/TextInputLayout"
         app:boxBackgroundColor="@color/black_2"
+        app:boxStrokeWidth="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView"

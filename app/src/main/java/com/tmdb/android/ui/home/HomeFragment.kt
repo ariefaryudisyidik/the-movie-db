@@ -44,12 +44,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         genreListAdapter = GenreListAdapter(viewModel, viewLifecycleOwner)
         movieListAdapter = MovieListAdapter(viewModel::onMovieClicked)
 
-        binding.layoutHome.rvGenre.adapter = genreListAdapter
-        binding.layoutHome.rvMovie.adapter = movieListAdapter.withLoadStateFooter(
-            footer = LoadingStateAdapter {
-                movieListAdapter.retry()
-            }
-        )
+        binding.apply {
+            layoutHome.rvGenre.adapter = genreListAdapter
+            layoutHome.rvMovie.adapter = movieListAdapter.withLoadStateFooter(
+                footer = LoadingStateAdapter {
+                    movieListAdapter.retry()
+                }
+            )
+        }
     }
 
     private fun observeData() {
@@ -73,8 +75,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun layoutNetworkState(state: Boolean) {
-        binding.layoutHome.root.isVisible = state
-        binding.layoutErrorConnection.root.isVisible = !state
+        binding.apply {
+            layoutHome.root.isVisible = state
+            layoutErrorConnection.root.isVisible = !state
+        }
     }
 
     private fun refresh() {
