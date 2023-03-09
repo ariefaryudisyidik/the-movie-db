@@ -1,3 +1,4 @@
+@file:Suppress("UnstableApiUsage")
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -7,7 +8,6 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
-
 android {
     namespace = "com.tmdb.android"
     compileSdk = libs.versions.compileSdk.get().toInt()
