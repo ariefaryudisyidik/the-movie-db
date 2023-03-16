@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.tmdb.android.ui.home.HomeFragment"
+        android:name="com.tmdb.android.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -27,16 +27,16 @@
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
-        android:name="com.tmdb.android.ui.detail.MovieDetailFragment"
+        android:name="com.tmdb.android.detail.MovieDetailFragment"
         android:label="fragment_movie_detail"
         tools:layout="@layout/fragment_movie_detail">
         <argument
             android:name="movie"
-            app:argType="com.tmdb.android.domain.model.Movie" />
+            app:argType="com.tmdb.android.core.domain.model.Movie" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.tmdb.android.ui.search.SearchFragment"
+        android:name="com.tmdb.android.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search">
         <action

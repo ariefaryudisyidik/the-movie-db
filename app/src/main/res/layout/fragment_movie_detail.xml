@@ -23,6 +23,17 @@
             app:shapeAppearanceOverlay="@style/RoundedImageBottom"
             tools:src="@drawable/img_spider_man_backdrop" />
 
+        <ImageView
+            android:id="@+id/img_favorite"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/image_favorite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_unfavorite" />
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_poster"
             android:layout_width="120dp"

@@ -2,6 +2,7 @@
     <string name="app_name">TMDB</string>
     <string name="image_poster">Image Poster</string>
     <string name="image_moviedb">Image MovieDB</string>
+    <string name="image_favorite">Image Favorite</string>
 
     <string name="title">Title:</string>
     <string name="release_date">Release Date:</string>
@@ -33,4 +34,6 @@
     <string name="trailer">Trailer</string>
     <string name="trailers">Trailers</string>
     <string name="reviews">Reviews</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
