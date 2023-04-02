@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.tmdb.android.core.data.remote.response.Genre
-import com.tmdb.android.databinding.ItemGenreBinding
+import com.tmdb.android.styling.databinding.ItemGenreBinding
 
 class GenreDetailAdapter :
     ListAdapter<Genre, GenreDetailAdapter.ViewHolder>(DIFF_CALLBACK) {

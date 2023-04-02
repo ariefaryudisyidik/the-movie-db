@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tmdb.android.core.data.remote.response.VideoResult
 import com.tmdb.android.core.utils.YOUTUBE_URL
 import com.tmdb.android.core.utils.loadPhotoUrl
-import com.tmdb.android.databinding.ItemVideoBinding
+import com.tmdb.android.styling.databinding.ItemVideoBinding
 
 class VideoListAdapter : ListAdapter<VideoResult, VideoListAdapter.ViewHolder>(DIFF_CALLBACK) {
 

@@ -9,7 +9,7 @@ import com.tmdb.android.core.domain.model.Review
 import com.tmdb.android.core.utils.IMAGE_URL
 import com.tmdb.android.core.utils.UI_AVATAR_URL
 import com.tmdb.android.core.utils.loadPhotoUrl
-import com.tmdb.android.databinding.ItemReviewBinding
+import com.tmdb.android.styling.databinding.ItemReviewBinding
 
 class ReviewListAdapter : ListAdapter<Review, ReviewListAdapter.ViewHolder>(DIFF_CALLBACK) {
 

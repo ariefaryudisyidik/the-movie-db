@@ -81,8 +81,8 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
                     result.data?.genres?.map {
                         val chip = Chip(requireContext()).apply {
                             text = it.name
-                            setChipBackgroundColorResource(R.color.black_2)
-                            setTextAppearanceResource(R.style.ChipTextStyle)
+                            setChipBackgroundColorResource(com.tmdb.android.styling.R.color.black_2)
+                            setTextAppearanceResource(com.tmdb.android.styling.R.style.ChipTextStyle)
                         }
                         binding.layoutGenre.chipGroup.addView(chip)
                     }

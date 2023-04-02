@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tmdb.android.core.domain.model.Movie
 import com.tmdb.android.core.utils.loadPhotoUrl
 import com.tmdb.android.core.utils.withDateFormat
-import com.tmdb.android.databinding.ItemMovieBinding
+import com.tmdb.android.styling.databinding.ItemMovieBinding
 
 class MovieListAdapter(private var onDetailClick: (Movie) -> Unit) :
     PagingDataAdapter<Movie, MovieListAdapter.ViewHolder>(DIFF_CALLBACK) {

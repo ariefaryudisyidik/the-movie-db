@@ -1,31 +1,27 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("kotlin-android")
-    id("kotlin-parcelize")
     id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
-    id("androidx.navigation.safeargs.kotlin")
 }
 
 apply("../shared_dependencies.gradle.kts")
 
 android {
-    namespace = "com.tmdb.android"
+    namespace = "com.tmdb.android.styling"
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        testInstrumentationRunner = "com.tmdb.android.utilities.MainTestRunner"
-        versionCode = 1
-        versionName = "1.0"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android.txt"),
+                getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
@@ -40,9 +36,4 @@ android {
     buildFeatures {
         viewBinding = true
     }
-    dynamicFeatures += setOf(":favorite")
-}
-
-dependencies {
-    implementation(project(":core"))
 }

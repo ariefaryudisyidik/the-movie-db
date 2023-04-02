@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tmdb.android.core.domain.model.Genre
 import com.tmdb.android.core.utils.activeButton
 import com.tmdb.android.core.utils.inactiveButton
-import com.tmdb.android.databinding.ItemGenreBinding
+import com.tmdb.android.styling.databinding.ItemGenreBinding
 import com.tmdb.android.home.HomeViewModel
 
 class GenreListAdapter(

@@ -1,26 +1,22 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
-    id("com.android.library")
+    id("com.android.dynamic-feature")
     id("kotlin-android")
     id("kotlin-parcelize")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
-    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 apply("../shared_dependencies.gradle.kts")
 
 android {
-    namespace = "com.tmdb.android.core"
+    namespace = "com.tmdb.android.favorite"
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.targetSdk.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
     }
-
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -30,15 +26,12 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
+    buildFeatures {
+        viewBinding = true
     }
 }
 
 dependencies {
-    api(project(":styling"))
+    implementation(project(":core"))
+    implementation(project(":app"))
 }
